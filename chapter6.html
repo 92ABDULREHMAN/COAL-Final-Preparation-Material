@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Video RAM</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 6: Display and Video RAM</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter5.html">Prev</a> <a href="chapter7.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Video RAM</h3>
+                <p>A dedicated portion of memory (starting at 0xB8000 for color) that holds the data displayed on the
+                    screen.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Attribute Byte</h3>
+                <p>The second byte of every character in video memory that defines color (foreground/background) and
+                    blinking.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Memory Mapped I/O</h3>
+                <p>A technique where hardware devices (like the screen) are accessed by reading/writing to specific
+                    memory addresses.</p>
+            </div>
+            <div class="definition-card">
+                <h3>CGA/EGA/VGA</h3>
+                <p>Different video standards; CS401 focuses on the 80x25 text mode (CGA).</p>
+            </div>
+            <div class="definition-card">
+                <h3>ASCII Code</h3>
+                <p>The first byte of every character in video memory representing the character itself.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. The base address for color video memory is:</div>
+                    <div class="mcq-answer">(B) 0xB8000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. In 80x25 mode, how many characters are on screen?</div>
+                    <div class="mcq-answer">(C) 2000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. Each character on screen requires how many bytes?</div>
+                    <div class="mcq-answer">(B) 2 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. The first byte of a screen character is the:</div>
+                    <div class="mcq-answer">(A) ASCII code</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. The second byte of a screen character is the:</div>
+                    <div class="mcq-answer">(C) Attribute byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. How many bits represent the foreground color?</div>
+                    <div class="mcq-answer">(A) 4 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. How many bits represent the background color?</div>
+                    <div class="mcq-answer">(B) 3 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. The MSB (bit 7) of the attribute byte is for:</div>
+                    <div class="mcq-answer">(C) Blinking</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. Total bytes required for one full screen (80x25) is:</div>
+                    <div class="mcq-answer">(B) 4000 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The video memory is accessed using:</div>
+                    <div class="mcq-answer">(C) ES register usually</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. White text on black background has attribute:</div>
+                    <div class="mcq-answer">(A) 0x07</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. To clear the screen, you fill it with:</div>
+                    <div class="mcq-answer">(B) Spaces (ASCII 0x20)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Screen coordinate (0,0) is at:</div>
+                    <div class="mcq-answer">(A) Top-left</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. Memory address for row 1, col 0 is:</div>
+                    <div class="mcq-answer">(B) 160 bytes from base</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. Memory address for any (r, c) is:</div>
+                    <div class="mcq-answer">(C) (r*80 + c) * 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. Color 0 in the attribute byte is:</div>
+                    <div class="mcq-answer">(A) Black</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. Color 7 in the attribute byte is:</div>
+                    <div class="mcq-answer">(C) White</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. The "I" bit (bit 3) in foreground stands for:</div>
+                    <div class="mcq-answer">(B) Intensity (Bright)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. Does the CPU directly talk to the monitor?</div>
+                    <div class="mcq-answer">(B) No, via Video RAM</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. The video controller reads the RAM every:</div>
+                    <div class="mcq-answer">(C) 1/60th of a second</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. "Red" foreground color code is:</div>
+                    <div class="mcq-answer">(A) 4</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. "Green" foreground color code is:</div>
+                    <div class="mcq-answer">(B) 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. "Blue" foreground color code is:</div>
+                    <div class="mcq-answer">(C) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. Yellow is a combination of:</div>
+                    <div class="mcq-answer">(B) Red + Green</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. The attribute byte 0x47 means:</div>
+                    <div class="mcq-answer">(A) White on Red</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. The attribute byte 0x87 means:</div>
+                    <div class="mcq-answer">(C) Blinking White on Black</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. Video memory for Mono displays starts at:</div>
+                    <div class="mcq-answer">(A) 0xB0000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. Is video memory part of the 1MB address space?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. The instruction mov [es:di], ax is common for:</div>
+                    <div class="mcq-answer">(B) Writing to screen</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. Why use ES for video?</div>
+                    <div class="mcq-answer">(B) DS is usually busy with data</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. ASCII for 'A' is:</div>
+                    <div class="mcq-answer">(B) 0x41</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. ASCII for '0' is:</div>
+                    <div class="mcq-answer">(A) 0x30</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. To move to the next line, add:</div>
+                    <div class="mcq-answer">(C) 160 to the offset</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. A screen refresh rate of 60Hz means:</div>
+                    <div class="mcq-answer">(B) 60 times per second</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. Text mode 80x25 uses:</div>
+                    <div class="mcq-answer">(A) 16 colors</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. Which segment register is normally used for Video RAM?</div>
+                    <div class="mcq-answer">(C) ES</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. The offset for row 5, column 10 is:</div>
+                    <div class="mcq-answer">(B) 820</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. The last character on screen is at offset:</div>
+                    <div class="mcq-answer">(C) 3998</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. Attribute 0x00 means:</div>
+                    <div class="mcq-answer">(A) Black on Black (Invisible)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. Foreground colors are in bits:</div>
+                    <div class="mcq-answer">(A) 0-3</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. Background colors are in bits:</div>
+                    <div class="mcq-answer">(B) 4-6</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. 0x70 attribute produces:</div>
+                    <div class="mcq-answer">(C) Black on White (Reverse)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. Video memory is also called:</div>
+                    <div class="mcq-answer">(B) Framebuffer</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. Can we read from Video RAM?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. To scroll the screen, we:</div>
+                    <div class="mcq-answer">(B) Move memory blocks upward</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. What is the attribute for "Bright Red on Blue"?</div>
+                    <div class="mcq-answer">(A) 0x1C</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. The screen is cleared by writing:</div>
+                    <div class="mcq-answer">(B) 0x0720 to every word</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. 80 * 25 equals:</div>
+                    <div class="mcq-answer">(B) 2000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. "Hardware-cursor" position is controlled by:</div>
+                    <div class="mcq-answer">(C) I/O Ports</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. CS401 screen examples use:</div>
+                    <div class="mcq-answer">(A) Direct memory mapping</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. To write to Video RAM, `ES` should point to:</div>
+                    <div class="mcq-answer">(B) `0xB800` (Segment address)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. If you write `0x07` to an even address (e.g., `0`):</div>
+                    <div class="mcq-answer">(A) It appears as a character (ASCII 7 - Beep/Dot)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. To make text blink, you must set bit:</div>
+                    <div class="mcq-answer">(C) Bit 7 of the attribute byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. `REP STOSW` uses which register as the counter?</div>
+                    <div class="mcq-answer">(B) `CX`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Why do we multiply `row * 160` instead of `row * 80`?</div>
+                    <div class="mcq-answer">(A) Each cell is 2 bytes (Char + Attribute)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. If you scroll the screen up by one line, you must:</div>
+                    <div class="mcq-answer">(B) Copy lines 1-24 to 0-23 and clear line 24</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. Video Memory is "Dual Ported", meaning:</div>
+                    <div class="mcq-answer">(C) CPU and Video Controller can access it simultaneously</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. The "Snow" effect on old CGA cards was caused by:</div>
+                    <div class="mcq-answer">(A) CPU and Video Controller contending for RAM</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. Can you change the font shape in Text Mode?</div>
+                    <div class="mcq-answer">(B) Yes, by reprogramming the Character Generator RAM</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. Direct Memory Access is faster than BIOS `INT 10h` because:</div>
+                    <div class="mcq-answer">(A) It avoids the overhead of software interrupts</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter5.html" class="btn">← Previous Chapter</a>
+            <a href="chapter7.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

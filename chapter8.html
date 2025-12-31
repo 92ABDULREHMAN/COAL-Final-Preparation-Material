@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Hardware Interrupts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 8: Hardware Interrupts</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter7.html">Prev</a> <a href="chapter9.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Hardware Interrupt</h3>
+                <p>An interrupt triggered by an external physical device (like a keyboard or timer) rather than a
+                    software instruction.</p>
+            </div>
+            <div class="definition-card">
+                <h3>PIC (Programmable Interrupt Controller)</h3>
+                <p>A chip (Intel 8259) that manages multiple hardware interrupt signals and prioritizes them for the
+                    processor.</p>
+            </div>
+            <div class="definition-card">
+                <h3>IRQ (Interrupt Request)</h3>
+                <p>Physical lines connecting peripheral devices to the PIC.</p>
+            </div>
+            <div class="definition-card">
+                <h3>ACK (Acknowledgment)</h3>
+                <p>A signal sent by the processor to the PIC to confirm it is ready to process the interrupt.</p>
+            </div>
+            <div class="definition-card">
+                <h3>End of Interrupt (EOI)</h3>
+                <p>A signal sent by the ISR to the PIC (port 0x20) to indicate the interrupt handling is complete.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. Hardware interrupts are triggered by:</div>
+                    <div class="mcq-answer">(B) External signals</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. Which chip handles hardware interrupts in a PC?</div>
+                    <div class="mcq-answer">(B) 8259 PIC</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. How many IRQ lines does a single 8259 PIC have?</div>
+                    <div class="mcq-answer">(A) 8</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. Which instruction disables hardware interrupts?</div>
+                    <div class="mcq-answer">(B) CLI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. Which instruction enables hardware interrupts?</div>
+                    <div class="mcq-answer">(A) STI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. The highest priority hardware interrupt is:</div>
+                    <div class="mcq-answer">(C) IRQ0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. The Keyboard is connected to:</div>
+                    <div class="mcq-answer">(B) IRQ1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. The EOI signal must be sent to port:</div>
+                    <div class="mcq-answer">(B) 0x20</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. What does EOI stand for?</div>
+                    <div class="mcq-answer">(A) End of Interrupt</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The PIC maps IRQ0 to which interrupt vector?</div>
+                    <div class="mcq-answer">(B) 0x08</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. The PIC maps IRQ1 to which interrupt vector?</div>
+                    <div class="mcq-answer">(C) 0x09</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. Hardware interrupts are:</div>
+                    <div class="mcq-answer">(B) Asynchronous</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Which interrupt is "Non-Maskable"?</div>
+                    <div class="mcq-answer">(A) NMI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. The NMI uses which pin on the processor?</div>
+                    <div class="mcq-answer">(C) NMI pin</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. IRQ2 is often used for:</div>
+                    <div class="mcq-answer">(B) Cascading to a second PIC</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. The PIC prioritizes interrupts based on:</div>
+                    <div class="mcq-answer">(A) IRQ number (lower is higher)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. A device sends a signal to the PIC via:</div>
+                    <div class="mcq-answer">(B) IRQ line</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. The CPU checks for hardware interrupts:</div>
+                    <div class="mcq-answer">(C) After every instruction</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. If the IF flag is 0, the CPU:</div>
+                    <div class="mcq-answer">(B) Ignores maskable interrupts</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. Which port is the PIC's Control Register?</div>
+                    <div class="mcq-answer">(A) 0x20</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. Which port is the PIC's Mask Register?</div>
+                    <div class="mcq-answer">(B) 0x21</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. To disable IRQ1, you write to port 0x21 with bit:</div>
+                    <div class="mcq-answer">(B) 1 set</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. The PIC sends which signal to the CPU?</div>
+                    <div class="mcq-answer">(A) INTR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. When the CPU acknowledges, the PIC sends the:</div>
+                    <div class="mcq-answer">(C) Interrupt Vector</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. Hardware interrupts allow for:</div>
+                    <div class="mcq-answer">(A) Multitasking</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. The Timer interrupt occurs how many times per second?</div>
+                    <div class="mcq-answer">(C) 18.2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. Serial Port (COM1) usually uses:</div>
+                    <div class="mcq-answer">(B) IRQ4</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. Parallel Port (LPT1) usually uses:</div>
+                    <div class="mcq-answer">(C) IRQ7</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. "Edge-triggered" means the interrupt triggers on:</div>
+                    <div class="mcq-answer">(A) Signal transition</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. "Level-triggered" means the interrupt triggers on:</div>
+                    <div class="mcq-answer">(B) Constant signal state</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. Can hardware interrupts be nested?</div>
+                    <div class="mcq-answer">(A) Yes, if STI is called inside ISR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. The second PIC (Slave) is connected to which IRQ of the Master?</div>
+                    <div class="mcq-answer">(B) IRQ2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. The Slave PIC handles IRQs:</div>
+                    <div class="mcq-answer">(C) 8 to 15</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Does NMI care about the CLI instruction?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The BIOS initializes the PIC during:</div>
+                    <div class="mcq-answer">(A) POST</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. An EOI of 0x20 is called:</div>
+                    <div class="mcq-answer">(A) Non-specific EOI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. The ISR for a hardware interrupt must end with:</div>
+                    <div class="mcq-answer">(C) EOI and IRET</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. If we forget EOI, what happens?</div>
+                    <div class="mcq-answer">(B) No further interrupts of same/lower priority occur</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. The Keyboard ISR reads the scan code from port:</div>
+                    <div class="mcq-answer">(A) 0x60</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. Hardware interrupts are essential for:</div>
+                    <div class="mcq-answer">(C) Real-time response</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. Which IRQ is for the Floppy Disk?</div>
+                    <div class="mcq-answer">(B) IRQ6</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. Masking an interrupt means:</div>
+                    <div class="mcq-answer">(A) Blocking it</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. The PIC stands for:</div>
+                    <div class="mcq-answer">(B) Programmable Interrupt Controller</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. The ISR for IRQ0 is often hooked to:</div>
+                    <div class="mcq-answer">(C) Change system time or preempt tasks</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Does every IRQ have a unique vector?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. Hardware interrupts are preferred over polling because they save:
+                    </div>
+                    <div class="mcq-answer">(B) CPU Cycles</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. The STI instruction sets which flag?</div>
+                    <div class="mcq-answer">(A) IF</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. A "spurious interrupt" usually happens on:</div>
+                    <div class="mcq-answer">(C) IRQ7</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. In the IVT, IRQ0 address starts at:</div>
+                    <div class="mcq-answer">(B) 0x0020 (8 * 4)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. Hardware interrupts are the basis of:</div>
+                    <div class="mcq-answer">(A) Event-driven programming</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. sending `0x20` to Port `0x20` prevents:</div>
+                    <div class="mcq-answer">(B) System hang (unacknowledged interrupt blocks lower priority ones)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. Does `CLI` disable NMI?</div>
+                    <div class="mcq-answer">(B) No, NMI cannot be masked by software</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. If `IRQ0` and `IRQ1` trigger simultaneously, which runs first?</div>
+                    <div class="mcq-answer">(A) IRQ0 (Highest priority)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. In the IVT, IRQ0 corresponds to Vector:</div>
+                    <div class="mcq-answer">(C) 0x08 (Reserved by Intel but used by IBM PC for timer)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Why is the Slave PIC connected to IRQ2?</div>
+                    <div class="mcq-answer">(B) Design choice in IBM AT to cascade interrupts</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. Which port is used to MASK interrupts (IMR)?</div>
+                    <div class="mcq-answer">(A) 0x21</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. To re-enable interrupts inside an ISR, you typically use:</div>
+                    <div class="mcq-answer">(C) `STI` immediately, but it's risky (Reentrancy)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. The "Interrupt Acknowledge" cycle is performed by:</div>
+                    <div class="mcq-answer">(A) The CPU answering the PIC</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. What happens if you don't send EOI?</div>
+                    <div class="mcq-answer">(A) The PIC stops sending further interrupts of that priority</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. IRQ7 (Parallel Port) is notorious for:</div>
+                    <div class="mcq-answer">(B) Variable (Spurious) interrupts</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter7.html" class="btn">← Previous Chapter</a>
+            <a href="chapter9.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

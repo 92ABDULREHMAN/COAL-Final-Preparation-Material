@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Bit Manipulation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 4: Bit Manipulation</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter3.html">Prev</a> <a href="chapter5.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>AND Operation</h3>
+                <p>A logical operation used to mask or clear specific bits. If any bit is ANDed with 0, the result is 0.
+                </p>
+            </div>
+            <div class="definition-card">
+                <h3>OR Operation</h3>
+                <p>A logical operation used to set specific bits. If any bit is ORed with 1, the result is 1.</p>
+            </div>
+            <div class="definition-card">
+                <h3>XOR Operation</h3>
+                <p>A logical operation used to invert or toggle specific bits. It is also a fast way to clear a register
+                    (xor ax, ax).</p>
+            </div>
+            <div class="definition-card">
+                <h3>NOT Operation</h3>
+                <p>A unary operation that inverts every bit in the operand (1 becomes 0, 0 becomes 1).</p>
+            </div>
+            <div class="definition-card">
+                <h3>SHL (Shift Left)</h3>
+                <p>Moves bits to the left, inserting 0 at the LSB. Effectively multiplies an unsigned number by 2.</p>
+            </div>
+            <div class="definition-card">
+                <h3>SHR (Shift Right)</h3>
+                <p>Moves bits to the right, inserting 0 at the MSB. Effectively divides an unsigned number by 2.</p>
+            </div>
+            <div class="definition-card">
+                <h3>SAR (Shift Arithmetic Right)</h3>
+                <p>Shifts bits right but preserves the sign bit (MSB). Used for signed division.</p>
+            </div>
+            <div class="definition-card">
+                <h3>ROL/ROR (Rotate)</h3>
+                <p>Circular shifts where the bit pushed out of one end is inserted back into the other end.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. Which instruction is used to clear specific bits?</div>
+                    <div class="mcq-answer">(A) AND</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. Which instruction is used to set specific bits?</div>
+                    <div class="mcq-answer">(B) OR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. xor ax, ax results in:</div>
+                    <div class="mcq-answer">(C) AX becoming 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. SHL by 1 bit is equivalent to:</div>
+                    <div class="mcq-answer">(B) Multiplying by 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. SHR by 1 bit is equivalent to:</div>
+                    <div class="mcq-answer">(A) Dividing by 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. Which shift preserves the sign bit?</div>
+                    <div class="mcq-answer">(C) SAR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. The bit pushed out during a shift enters the:</div>
+                    <div class="mcq-answer">(B) Carry Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. NOT is a:</div>
+                    <div class="mcq-answer">(A) Unary instruction</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. To toggle a bit, use:</div>
+                    <div class="mcq-answer">(C) XOR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The result of 1010 AND 1100 is:</div>
+                    <div class="mcq-answer">(B) 1000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. The result of 1010 OR 1100 is:</div>
+                    <div class="mcq-answer">(A) 1110</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. The result of 1010 XOR 1100 is:</div>
+                    <div class="mcq-answer">(C) 0110</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. In SHL, the vacated bit is filled with:</div>
+                    <div class="mcq-answer">(A) 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. In SAR, the vacated bit is filled with:</div>
+                    <div class="mcq-answer">(B) The previous MSB</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. Which instruction does NOT affect the Carry Flag?</div>
+                    <div class="mcq-answer">(D) NOT</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. How many bits can be shifted using an immediate value in 8088?</div>
+                    <div class="mcq-answer">(A) 1 only</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. To shift by more than 1 bit, the count must be in:</div>
+                    <div class="mcq-answer">(C) CL register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. test instruction is similar to:</div>
+                    <div class="mcq-answer">(B) AND</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. test affects:</div>
+                    <div class="mcq-answer">(C) Flags only</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. ROL stands for:</div>
+                    <div class="mcq-answer">(A) Rotate Left</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. In RCR, the bit moves through the:</div>
+                    <div class="mcq-answer">(B) Carry Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. Bit manipulation is often used for:</div>
+                    <div class="mcq-answer">(D) All of the above (Masking, Encryption, Hardware Control)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. Which operation is used to check if a bit is SET?</div>
+                    <div class="mcq-answer">(A) AND</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. Multiplication using shifts is:</div>
+                    <div class="mcq-answer">(B) Faster than the mul instruction</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. The MSB of a 16-bit register is bit number:</div>
+                    <div class="mcq-answer">(C) 15</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. The LSB of any register is bit number:</div>
+                    <div class="mcq-answer">(A) 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. shl ax, 1 is how many bytes?</div>
+                    <div class="mcq-answer">(B) 2 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. After mov al, 0x80 and shl al, 1, the Carry Flag is:</div>
+                    <div class="mcq-answer">(A) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. After mov al, 0x01 and shr al, 1, the Zero Flag is:</div>
+                    <div class="mcq-answer">(A) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. Logical operations are performed:</div>
+                    <div class="mcq-answer">(C) Bit by bit</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. Can we XOR a register with itself?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. What is the 1's complement of 1011?</div>
+                    <div class="mcq-answer">(B) 0100</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. Selective bit inversion is done by:</div>
+                    <div class="mcq-answer">(C) XOR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. In 8088, shl ax, cl is valid if:</div>
+                    <div class="mcq-answer">(A) CL contains the shift count</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The parity flag is affected by:</div>
+                    <div class="mcq-answer">(B) Logical instructions</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. Which instruction is used for even/odd parity checking?</div>
+                    <div class="mcq-answer">(C) XOR</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. SAL and SHL are:</div>
+                    <div class="mcq-answer">(A) Identical</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. Division of -4 by 2 using SHR results in:</div>
+                    <div class="mcq-answer">(B) An incorrect positive number</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. Division of -4 by 2 using SAR results in:</div>
+                    <div class="mcq-answer">(A) -2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. Rotate instructions are useful for:</div>
+                    <div class="mcq-answer">(C) Serial data transfer</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. and ax, 0 sets the Zero Flag to:</div>
+                    <div class="mcq-answer">(A) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. or ax, 0xFFFF sets all bits to:</div>
+                    <div class="mcq-answer">(B) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. rcl stands for:</div>
+                    <div class="mcq-answer">(B) Rotate Carry Left</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. Which instruction is used to swap nibbles?</div>
+                    <div class="mcq-answer">(C) ROL (by 4 bits)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Bit masking is a technique of:</div>
+                    <div class="mcq-answer">(A) Isolating bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. Is not 0 equal to 1?</div>
+                    <div class="mcq-answer">(B) In binary, it is all 1s (0xFF)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. xor with 0xFF inverts:</div>
+                    <div class="mcq-answer">(B) All bits in a byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. test ax, ax is used to check if AX is:</div>
+                    <div class="mcq-answer">(C) Zero or Negative</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. Shift instructions are part of the:</div>
+                    <div class="mcq-answer">(A) ALU</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. Bit 7 in a byte is the:</div>
+                    <div class="mcq-answer">(B) Sign bit</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. `XOR AX, AX` is preferred over `MOV AX, 0` because:</div>
+                    <div class="mcq-answer">(C) It is faster and uses fewer bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. If `AL=80h` (-128), `SAR AL, 1` results in:</div>
+                    <div class="mcq-answer">(A) C0h (-64) - Sign is preserved</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. `SHR AL, 1` on `AL=80h` results in:</div>
+                    <div class="mcq-answer">(B) 40h (+64) - Zero is shifted in</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. To check if Bit 3 is set without changing the register:</div>
+                    <div class="mcq-answer">(C) `TEST AX, 8`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. `NOT` instruction affects which flags?</div>
+                    <div class="mcq-answer">(D) None (It does not affect flags)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. If you want to divide `-10` by `2`, you must use:</div>
+                    <div class="mcq-answer">(B) `SAR`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. `ROL AL, 1` on `AL=80h` sets CF to:</div>
+                    <div class="mcq-answer">(A) 1 (MSB rotates into CF)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. Masking: To force the lower nibble to zero:</div>
+                    <div class="mcq-answer">(A) `AND AL, 0F0h`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. `XOR`ing a value with `11111111b` (0xFF) is equal to:</div>
+                    <div class="mcq-answer">(B) `NOT` operation (Inversion)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. Why `SHL AX, 5` is invalid on 8088?</div>
+                    <div class="mcq-answer">(C) Shift count > 1 must be in `CL`</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter3.html" class="btn">← Previous Chapter</a>
+            <a href="chapter5.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

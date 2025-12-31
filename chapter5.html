@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Subroutines</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 5: Subroutines</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter4.html">Prev</a> <a href="chapter6.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Subroutine</h3>
+                <p>A reusable block of code that performs a specific task and can be "called" from different parts of a
+                    program.</p>
+            </div>
+            <div class="definition-card">
+                <h3>CALL</h3>
+                <p>An instruction that pushes the current IP onto the stack and jumps to the subroutine address.</p>
+            </div>
+            <div class="definition-card">
+                <h3>RET</h3>
+                <p>An instruction that pops the top of the stack back into the IP, returning control to the caller.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Stack</h3>
+                <p>A LIFO (Last-In, First-Out) data structure in memory used to store return addresses and local
+                    variables.</p>
+            </div>
+            <div class="definition-card">
+                <h3>PUSH</h3>
+                <p>Decrements the Stack Pointer (SP) and stores a value on the stack.</p>
+            </div>
+            <div class="definition-card">
+                <h3>POP</h3>
+                <p>Retrieves a value from the stack and increments the Stack Pointer (SP).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Parameters</h3>
+                <p>Data passed to a subroutine, either via registers, memory, or the stack.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. Which instruction starts a subroutine call?</div>
+                    <div class="mcq-answer">(B) CALL</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. Which instruction ends a subroutine?</div>
+                    <div class="mcq-answer">(C) RET</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. The stack works on the principle of:</div>
+                    <div class="mcq-answer">(A) LIFO</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. When PUSH is executed, SP:</div>
+                    <div class="mcq-answer">(B) Decrements by 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. When POP is executed, SP:</div>
+                    <div class="mcq-answer">(A) Increments by 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. The CALL instruction saves the:</div>
+                    <div class="mcq-answer">(C) IP only (for Near calls)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. The stack grows towards:</div>
+                    <div class="mcq-answer">(B) Lower addresses</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. Where is the stack located?</div>
+                    <div class="mcq-answer">(C) In System Memory</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. Which register points to the top of the stack?</div>
+                    <div class="mcq-answer">(B) SP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. Passing parameters through registers is:</div>
+                    <div class="mcq-answer">(A) Fast but limited</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. Passing parameters through the stack is:</div>
+                    <div class="mcq-answer">(B) Flexible and scalable</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. A "Near" CALL stays within the same:</div>
+                    <div class="mcq-answer">(A) Segment</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. A "Far" CALL saves both:</div>
+                    <div class="mcq-answer">(C) CS and IP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. RET instruction pops the value into:</div>
+                    <div class="mcq-answer">(B) IP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. The stack segment is defined by:</div>
+                    <div class="mcq-answer">(C) SS register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. How many bytes does a push ax take on the stack?</div>
+                    <div class="mcq-answer">(B) 2 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. Can we push an 8-bit register (like AL)?</div>
+                    <div class="mcq-answer">(B) No (only 16-bit)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. Saving registers at the start of a subroutine is called:</div>
+                    <div class="mcq-answer">(A) Preserving state</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. The instruction ret 4 pops the IP and then:</div>
+                    <div class="mcq-answer">(C) Adds 4 to SP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. Which register is often used as a "Frame Pointer"?</div>
+                    <div class="mcq-answer">(B) BP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. Accessing stack parameters using BP is called:</div>
+                    <div class="mcq-answer">(C) Base + Offset addressing</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. The pushf instruction saves:</div>
+                    <div class="mcq-answer">(B) The Flags Register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. The popf instruction restores:</div>
+                    <div class="mcq-answer">(B) The Flags Register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. Recursion is a technique where a subroutine:</div>
+                    <div class="mcq-answer">(A) Calls itself</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. Infinite recursion causes:</div>
+                    <div class="mcq-answer">(C) Stack Overflow</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. Initial SP value is usually:</div>
+                    <div class="mcq-answer">(B) The end of the stack segment</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. Is the stack emptied when the program ends?</div>
+                    <div class="mcq-answer">(B) No, the memory remains</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. call 0x1234 is an example of:</div>
+                    <div class="mcq-answer">(A) Direct Call</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. A subroutine makes code:</div>
+                    <div class="mcq-answer">(D) More modular and readable</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. To pass 100 values to a subroutine, use:</div>
+                    <div class="mcq-answer">(C) The Stack</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. The "bp" register defaults to which segment?</div>
+                    <div class="mcq-answer">(B) SS</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. push [bx] is:</div>
+                    <div class="mcq-answer">(A) Valid</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. pop 5 is:</div>
+                    <div class="mcq-answer">(B) Invalid</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Does call change the Flags?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The "return address" is the address of:</div>
+                    <div class="mcq-answer">(B) The instruction after CALL</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. ret stands for:</div>
+                    <div class="mcq-answer">(A) Return</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. Subroutines help in:</div>
+                    <div class="mcq-answer">(C) Reducing code size</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. In a Far RET, how many bytes are popped?</div>
+                    <div class="mcq-answer">(C) 4 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. Register "shadowing" is avoided by using:</div>
+                    <div class="mcq-answer">(A) PUSH and POP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. The stack is a:</div>
+                    <div class="mcq-answer">(B) Linear data structure</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. Who cleans the stack in ret n?</div>
+                    <div class="mcq-answer">(B) The Callee</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. Who cleans the stack in add sp, n?</div>
+                    <div class="mcq-answer">(A) The Caller</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. Is it mandatory to use the stack for subroutines?</div>
+                    <div class="mcq-answer">(B) No (but recommended)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. call bx is an example of:</div>
+                    <div class="mcq-answer">(C) Indirect Call</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Stack overflow happens when:</div>
+                    <div class="mcq-answer">(A) SP goes below 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. push immediate is valid on:</div>
+                    <div class="mcq-answer">(B) 80186 and later (not basic 8088)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. Local variables are usually stored:</div>
+                    <div class="mcq-answer">(C) On the stack</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. BP stands for:</div>
+                    <div class="mcq-answer">(A) Base Pointer</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. SP stands for:</div>
+                    <div class="mcq-answer">(B) Stack Pointer</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. The instruction pop ax moves data from:</div>
+                    <div class="mcq-answer">(B) Stack to AX</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. In a `NEAR CALL`, `SP` is decremented by:</div>
+                    <div class="mcq-answer">(A) 2 (Pushes IP only)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. `RET 6` effectively does:</div>
+                    <div class="mcq-answer">(C) `POP IP` then `ADD SP, 6`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. When `PUSH SP` is executed on 8088:</div>
+                    <div class="mcq-answer">(B) The OLD value of SP is pushed</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. If you `PUSH AX` but forget to `POP` before `RET`:</div>
+                    <div class="mcq-answer">(A) The CPU jumps to a wrong address (AX value becomes IP)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Pascal Calling Convention means:</div>
+                    <div class="mcq-answer">(C) Callee cleans the stack (`RET n`)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. C Calling Convention means:</div>
+                    <div class="mcq-answer">(B) Caller cleans the stack (`ADD SP, n`)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. Accessing local variables at `[BP-2]` requires:</div>
+                    <div class="mcq-answer">(A) Saving and restoring BP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. Recursion without a base case causes:</div>
+                    <div class="mcq-answer">(B) Stack Overflow</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. Can you `POP CS`?</div>
+                    <div class="mcq-answer">(C) No, it's illegal (security/stability)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. Which instruction is used for software interrupts, not subroutines?
+                    </div>
+                    <div class="mcq-answer">(B) `INT`</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter4.html" class="btn">← Previous Chapter</a>
+            <a href="chapter6.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

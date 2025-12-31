@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Branching</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 3: Branching</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter2.html">Prev</a> <a href="chapter4.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Conditional Jump</h3>
+                <p>A jump that only occurs if a specific condition (based on flags) is met (e.g., JZ jumps if Zero flag
+                    is set).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Unconditional Jump</h3>
+                <p>A jump that always occurs, regardless of the flag states (e.g., JMP).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Relative Addressing</h3>
+                <p>A jump target specified as a "signed displacement" (offset) from the current Instruction Pointer,
+                    rather than an absolute address.</p>
+            </div>
+            <div class="definition-card">
+                <h3>CMP (Compare)</h3>
+                <p>An instruction that subtracts the source from the destination and updates flags without changing
+                    either operand.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Two's Complement</h3>
+                <p>The standard way of representing signed numbers where the MSB indicates the sign.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Signed vs Unsigned Jumps</h3>
+                <p>Different jump instructions used depending on how the data is interpreted (e.g., JG for signed vs JA
+                    for unsigned).</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. cmp works like which instruction?</div>
+                    <div class="mcq-answer">(B) sub</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. cmp ax, bx changes:</div>
+                    <div class="mcq-answer">(C) Flags only</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. jz stands for:</div>
+                    <div class="mcq-answer">(A) Jump if Zero</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. jnz stands for:</div>
+                    <div class="mcq-answer">(B) Jump if Not Zero</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. jmp is an:</div>
+                    <div class="mcq-answer">(A) Unconditional jump</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. Conditional jumps use:</div>
+                    <div class="mcq-answer">(B) Relative addressing</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. Relative jumps are limited to:</div>
+                    <div class="mcq-answer">(B) -128 to +127 bytes (Short jump)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. ja is used for:</div>
+                    <div class="mcq-answer">(A) Unsigned comparison</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. jg is used for:</div>
+                    <div class="mcq-answer">(B) Signed comparison</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. jbe stands for:</div>
+                    <div class="mcq-answer">(C) Jump if Below or Equal</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. jle stands for:</div>
+                    <div class="mcq-answer">(D) Jump if Less or Equal</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. Which flag does jz check?</div>
+                    <div class="mcq-answer">(B) Zero Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Signed numbers use:</div>
+                    <div class="mcq-answer">(C) Two's complement</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. Unsigned comparison uses terms:</div>
+                    <div class="mcq-answer">(A) Above/Below</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. Signed comparison uses terms:</div>
+                    <div class="mcq-answer">(B) Greater/Less</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. If ax = bx, cmp ax, bx sets:</div>
+                    <div class="mcq-answer">(A) Zero Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. If ax < bx (unsigned), cmp ax, bx sets:</div>
+                            <div class="mcq-answer">(B) Carry Flag</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">18. A "near" jump is:</div>
+                        <div class="mcq-answer">(B) Within the same segment</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">19. A "far" jump is:</div>
+                        <div class="mcq-answer">(C) To a different segment</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">20. loop instruction decrements:</div>
+                        <div class="mcq-answer">(C) CX register</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">21. loop continues until CX is:</div>
+                        <div class="mcq-answer">(B) Zero</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">22. je is synonymous with:</div>
+                        <div class="mcq-answer">(A) jz</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">23. jne is synonymous with:</div>
+                        <div class="mcq-answer">(B) jnz</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">24. Comparison is performed by:</div>
+                        <div class="mcq-answer">(C) Subtraction</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">25. jnc jumps if:</div>
+                        <div class="mcq-answer">(B) Carry is NOT set</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">26. Signed interpretation of 0xFFFF is:</div>
+                        <div class="mcq-answer">(B) -1</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">27. Unsigned interpretation of 0xFFFF is:</div>
+                        <div class="mcq-answer">(A) 65535</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">28. jb jumps if:</div>
+                        <div class="mcq-answer">(A) CF = 1</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">29. Which jump is used for unsigned "higher"?</div>
+                        <div class="mcq-answer">(A) ja</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">30. Which jump is used for signed "smaller"?</div>
+                        <div class="mcq-answer">(B) jl</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">31. cmp destination is:</div>
+                        <div class="mcq-answer">(A) First operand</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">32. Does jmp affect flags?</div>
+                        <div class="mcq-answer">(B) No</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">33. A target label in a jump is converted to:</div>
+                        <div class="mcq-answer">(C) Offset/Relative address</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">34. loop is equivalent to:</div>
+                        <div class="mcq-answer">(C) dec cx and jnz</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">35. The Sign Flag (S) is set if:</div>
+                        <div class="mcq-answer">(B) Result is negative</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">36. Overflow Flag (O) is for:</div>
+                        <div class="mcq-answer">(A) Signed arithmetic errors</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">37. Can a conditional jump be "Far"?</div>
+                        <div class="mcq-answer">(B) No (Directly)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">38. The jump range for short jump is:</div>
+                        <div class="mcq-answer">(A) 1 byte displacement</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">39. jc is Jump if:</div>
+                        <div class="mcq-answer">(A) Carry</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">40. Who manages high-level "if" conditions?</div>
+                        <div class="mcq-answer">(C) The compiler</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">41. A loop typically starts with:</div>
+                        <div class="mcq-answer">(A) Initializing CX</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">42. Comparison of 5 and 10 sets:</div>
+                        <div class="mcq-answer">(C) Sign flag (if signed)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">43. Is cmp a data movement instruction?</div>
+                        <div class="mcq-answer">(B) No</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">44. Conditional jumps are based on:</div>
+                        <div class="mcq-answer">(A) Status of the FLAGS register</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">45. To jump if ax >= bx (unsigned), use:</div>
+                        <div class="mcq-answer">(B) jae</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">46. To jump if ax <= bx (signed), use:</div>
+                                <div class="mcq-answer">(C) jle</div>
+                        </div>
+                        <div class="mcq-card">
+                            <div class="mcq-question">47. cmp ax, ax will always set:</div>
+                            <div class="mcq-answer">(B) Zero Flag</div>
+                        </div>
+                        <div class="mcq-card">
+                            <div class="mcq-question">48. jne exit jumps if:</div>
+                            <div class="mcq-answer">(B) Result was NOT zero</div>
+                        </div>
+                        <div class="mcq-card">
+                            <div class="mcq-question">49. Branching changes the:</div>
+                            <div class="mcq-answer">(C) Program flow</div>
+                        </div>
+                        <div class="mcq-card">
+                            <div class="mcq-question">50. The target of a jump is often a:</div>
+                            <div class="mcq-answer">(A) Label</div>
+                        </div>
+                    </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. `CMP AX, BX` is effectively:</div>
+                    <div class="mcq-answer">(B) `SUB AX, BX` but result is discarded</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. If `AX=FFFFh` and `BX=0001h`, `CMP AX, BX`. `JG` will jump?</div>
+                    <div class="mcq-answer">(B) No (Signed: -1 < 1)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">53. Same as above, but `JA` will jump?</div>
+                        <div class="mcq-answer">(A) Yes (Unsigned: 65535 > 1)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">54. Does `LOOP` instruction affect the Zero Flag?</div>
+                        <div class="mcq-answer">(C) No, it only affects `CX`</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">55. Which jump relies on the Overflow Flag (OF)?</div>
+                        <div class="mcq-answer">(B) `JO` (Jump if Overflow)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">56. Maximum forward jump for `SHORT JMP` is:</div>
+                        <div class="mcq-answer">(A) +127 bytes</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">57. `JCXZ` jumps if:</div>
+                        <div class="mcq-answer">(B) CX is Zero</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">58. `TEST AX, AX` is often used to:</div>
+                        <div class="mcq-answer">(C) Check if AX is zero without changing it</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">59. If `CF=1` and `ZF=1`, `JBE` will jump?</div>
+                        <div class="mcq-answer">(A) Yes (Below or Equal)</div>
+                    </div>
+                    <div class="mcq-card">
+                        <div class="mcq-question">60. Can you JMP to a register value (e.g., `JMP AX`)?</div>
+                        <div class="mcq-answer">(B) Yes (Indirect Jump)</div>
+                    </div>
+                </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter2.html" class="btn">← Previous Chapter</a>
+            <a href="chapter4.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS401 Study Guide - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Final Exam Preparation</p>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="index-grid">
+            <a href="chapter1.html" class="chapter-link-card">
+                <h2>Chapter 1: Introduction</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter2.html" class="chapter-link-card">
+                <h2>Chapter 2: Addressing Modes</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter3.html" class="chapter-link-card">
+                <h2>Chapter 3: Branching</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter4.html" class="chapter-link-card">
+                <h2>Chapter 4: Bit Manipulation</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter5.html" class="chapter-link-card">
+                <h2>Chapter 5: Subroutines</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter6.html" class="chapter-link-card">
+                <h2>Chapter 6: Video RAM</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter7.html" class="chapter-link-card">
+                <h2>Chapter 7: Software Interrupts</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter8.html" class="chapter-link-card">
+                <h2>Chapter 8: Hardware Interrupts</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+            <a href="chapter9.html" class="chapter-link-card">
+                <h2>Chapter 9: PIT & RTC</h2>
+                <p>Definitions & 50 MCQs</p>
+            </a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+</html>

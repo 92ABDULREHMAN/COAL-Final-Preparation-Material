@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: PIT and RTC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 9: Real-Time Clock and Peripheral Interfacing</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter8.html">Prev</a> <a href="index.html">Index</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Programmable Interval Timer (PIT)</h3>
+                <p>The 8253/8254 chip used to generate precise time delays and the system "tick."</p>
+            </div>
+            <div class="definition-card">
+                <h3>IRQ0</h3>
+                <p>The highest priority hardware interrupt, triggered by the timer 18.2 times per second.</p>
+            </div>
+            <div class="definition-card">
+                <h3>I/O Ports</h3>
+                <p>Specific addresses (separate from memory) used to communicate with hardware controllers (accessed via
+                    IN and OUT instructions).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Hooking an Interrupt</h3>
+                <p>The process of replacing an address in the IVT with the address of a custom-written ISR to extend or
+                    modify system behavior.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. The PIT chip is the:</div>
+                    <div class="mcq-answer">(B) 8253</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. The input frequency to the PIT in a PC is:</div>
+                    <div class="mcq-answer">(C) 1.19318 MHz</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. To get 18.2 ticks per second, the PIT divisor is:</div>
+                    <div class="mcq-answer">(B) 65536</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. The PIT has how many independent counters?</div>
+                    <div class="mcq-answer">(B) 3</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. Which PIT counter is used for the system clock?</div>
+                    <div class="mcq-answer">(A) Counter 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. Which PIT counter is used for the PC Speaker?</div>
+                    <div class="mcq-answer">(C) Counter 2</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. The PIT is accessed via I/O ports:</div>
+                    <div class="mcq-answer">(B) 0x40 - 0x43</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. To send a new divisor to Counter 0, you write to port:</div>
+                    <div class="mcq-answer">(A) 0x40</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. The PIT Control Word is written to port:</div>
+                    <div class="mcq-answer">(C) 0x43</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The BIOS timer tick count is stored at memory address:</div>
+                    <div class="mcq-answer">(B) 0x0040:006C</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. The timer tick count is a:</div>
+                    <div class="mcq-answer">(C) 4-byte (DWord) value</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. Interfacing with the speaker requires the PIT and:</div>
+                    <div class="mcq-answer">(B) 8255 PPI (Port 0x61)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. To turn the speaker ON, you set which bits of Port 0x61?</div>
+                    <div class="mcq-answer">(C) Bits 0 and 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. The Real-Time Clock (RTC) chip is often the:</div>
+                    <div class="mcq-answer">(A) Motorola 146818</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. The RTC is powered by:</div>
+                    <div class="mcq-answer">(B) A battery (CMOS)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. RTC data is accessed through ports:</div>
+                    <div class="mcq-answer">(C) 0x70 and 0x71</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. Port 0x70 is used to:</div>
+                    <div class="mcq-answer">(A) Select the CMOS register address</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. Port 0x71 is used to:</div>
+                    <div class="mcq-answer">(B) Read or Write the data</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. The RTC stores time in which format?</div>
+                    <div class="mcq-answer">(B) BCD (Binary Coded Decimal)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. To read the "Seconds" from RTC, you select address:</div>
+                    <div class="mcq-answer">(A) 0x00</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. To read the "Hours" from RTC, you select address:</div>
+                    <div class="mcq-answer">(C) 0x04</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. Hooking the timer interrupt (IRQ0) is used for:</div>
+                    <div class="mcq-answer">(D) All of the above (Animations, Music, Context Switching)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. The PIT can be used as a:</div>
+                    <div class="mcq-answer">(C) Square wave generator</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. In BCD, the value 25 is stored as:</div>
+                    <div class="mcq-answer">(B) 0x25</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. The command to "latch" a counter in PIT is sent to:</div>
+                    <div class="mcq-answer">(C) Port 0x43</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. Which instruction reads from an I/O port?</div>
+                    <div class="mcq-answer">(A) IN</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. Which instruction writes to an I/O port?</div>
+                    <div class="mcq-answer">(B) OUT</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. OUT 0x20, al is a typical way to:</div>
+                    <div class="mcq-answer">(C) Send EOI to PIC</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. The IN instruction always uses which register as destination?</div>
+                    <div class="mcq-answer">(A) AL or AX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. The OUT instruction always uses which register as source?</div>
+                    <div class="mcq-answer">(A) AL or AX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. Can we use MOV to access I/O ports?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. A 16-bit port address must be stored in:</div>
+                    <div class="mcq-answer">(C) DX register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. The PIT operates in different:</div>
+                    <div class="mcq-answer">(B) Modes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Mode 3 of the PIT is:</div>
+                    <div class="mcq-answer">(A) Square Wave Mode</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The PC Speaker frequency is determined by:</div>
+                    <div class="mcq-answer">(B) PIT Counter 2 Divisor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. Refreshing the DRAM was traditionally handled by:</div>
+                    <div class="mcq-answer">(B) PIT Counter 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. The RTC also contains:</div>
+                    <div class="mcq-answer">(C) CMOS Setup information</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. The "Century" byte in RTC is at address:</div>
+                    <div class="mcq-answer">(B) 0x32 (usually)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. To prevent RTC from updating while reading, you check:</div>
+                    <div class="mcq-answer">(A) Status Register A</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. The timer tick (IRQ0) happens every:</div>
+                    <div class="mcq-answer">(B) 55 milliseconds</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. How many ticks are in 24 hours?</div>
+                    <div class="mcq-answer">(C) Approx 1.57 million</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. When the tick count reaches the max for 24 hours, it:</div>
+                    <div class="mcq-answer">(B) Resets to 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. A "Watchdog Timer" is used to:</div>
+                    <div class="mcq-answer">(A) Reset a hung system</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. High-resolution timing requires:</div>
+                    <div class="mcq-answer">(C) Programming the PIT with a smaller divisor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Does the PIT affect the CPU speed?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. The OUT instruction to port 0x43 with value 0x36 initializes:</div>
+                    <div class="mcq-answer">(A) Counter 0, Mode 3</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. I/O ports 0x00 to 0xFF are:</div>
+                    <div class="mcq-answer">(B) 8-bit addresses</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. I/O ports 0x0000 to 0xFFFF are:</div>
+                    <div class="mcq-answer">(C) 16-bit addresses</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. "Polling" a port means:</div>
+                    <div class="mcq-answer">(B) Constantly checking its status in a loop</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. The Real-Time Clock is independent of:</div>
+                    <div class="mcq-answer">(A) The CPU Clock</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. Hooking `INT 08h` vs `INT 1Ch`:</div>
+                    <div class="mcq-answer">(A) 08h interacts with hardware; 1Ch is a safe software hook called by 08h
+                    </div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. Reading the PIT counter "on the fly" without stopping it requires:
+                    </div>
+                    <div class="mcq-answer">(C) Sending a Latch Command to Port 0x43</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. Why is the freq 1.19318 MHz?</div>
+                    <div class="mcq-answer">(B) It's derived from the NTSC colorburst crystal / 3</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. Accessing RTC ports necessitates:</div>
+                    <div class="mcq-answer">(A) Disabling interrupts (`CLI`) so the index/data write is atomic</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Status Register A (RTC) `Bit 7` tells us:</div>
+                    <div class="mcq-answer">(B) Update In Progress (UIP) - Do not read time now</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. If you change the Timer Divisor to 0 (65536):</div>
+                    <div class="mcq-answer">(A) It runs at the standard 18.2 Hz</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. Does the PIT keep counting if the CPU is halted (`HLT`)?</div>
+                    <div class="mcq-answer">(A) Yes, it's an external hardware chip</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. The PC Speaker uses:</div>
+                    <div class="mcq-answer">(C) PIT Channel 2 + Port 61h (Gate bit)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. BCD `0x29` plus `1` decimal equals:</div>
+                    <div class="mcq-answer">(B) `0x30` in BCD</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. Why hook the Timer interrupt for multitasking?</div>
+                    <div class="mcq-answer">(A) It guarantees regular CPU control to switch tasks</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter8.html" class="btn">← Previous Chapter</a>
+            <div class="btn disabled" style="opacity: 0.5; pointer-events: none;">End of Guide</div>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

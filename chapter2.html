@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Addressing Modes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 2: Addressing Modes</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter1.html">Prev</a> <a href="chapter3.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Direct Addressing</h3>
+                <p>Accessing memory by specifying the actual memory address (or a label representing it) in the
+                    instruction.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Data Declaration</h3>
+                <p>Using directives like db (define byte) or dw (define word) to reserve memory space for data.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Size Mismatch Error</h3>
+                <p>An error that occurs when the size of the source operand does not match the size of the destination
+                    operand (e.g., mov al, [word_variable]).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Effective Address</h3>
+                <p>The final offset of a memory location calculated by the processor after combining segments, bases,
+                    and indexes.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Label</h3>
+                <p>A human-readable name that the assembler replaces with a memory address during the translation
+                    process.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Register Indirect Addressing</h3>
+                <p>Accessing memory where the address is stored inside a register (e.g., mov ax, [bx]).</p>
+            </div>
+            <div class="definition-card">
+                <h3>Segment Association</h3>
+                <p>The rule that determines which segment register is used by default with a specific offset register
+                    (e.g., BX defaults to DS).</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. Direct addressing uses:</div>
+                    <div class="mcq-answer">(B) Constant memory addresses</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. dw stands for:</div>
+                    <div class="mcq-answer">(A) Define Word</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. db stands for:</div>
+                    <div class="mcq-answer">(B) Define Byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. How many bytes does dw occupy?</div>
+                    <div class="mcq-answer">(B) 2 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. How many bytes does db occupy?</div>
+                    <div class="mcq-answer">(A) 1 byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. mov ax, [num1] is what mode?</div>
+                    <div class="mcq-answer">(A) Direct Addressing</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. In mov ax, [bx], the address is in:</div>
+                    <div class="mcq-answer">(C) BX register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. What error is mov al, [word_var]?</div>
+                    <div class="mcq-answer">(C) Size Mismatch</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. Labels are replaced by:</div>
+                    <div class="mcq-answer">(B) Memory addresses</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The instruction pointer (IP) moves:</div>
+                    <div class="mcq-answer">(A) Forward after each instruction</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. Which register is a default offset for DS?</div>
+                    <div class="mcq-answer">(B) BX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. The debugger interprets data in the code window as:</div>
+                    <div class="mcq-answer">(C) Instructions (Opcodes)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Who is responsible for matching operand sizes?</div>
+                    <div class="mcq-answer">(B) The programmer</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. Memory addresses are effectively:</div>
+                    <div class="mcq-answer">(B) Numbers</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. A word operation is determined by:</div>
+                    <div class="mcq-answer">(A) The register size (e.g., AX)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. mov [num1], ax moves data to:</div>
+                    <div class="mcq-answer">(B) Memory</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. Alignment errors are avoided by:</div>
+                    <div class="mcq-answer">(C) Matching data size to access size</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. Can the processor detect if a memory address is "data" or "code"?
+                    </div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. Segment registers are usually:</div>
+                    <div class="mcq-answer">(B) 16 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. Addressing "word" data at an odd address is:</div>
+                    <div class="mcq-answer">(B) Slower (requires two cycles)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. Register Indirect addressing uses:</div>
+                    <div class="mcq-answer">(C) Square brackets []</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. In mov ax, [bx+si], the effective address is:</div>
+                    <div class="mcq-answer">(C) BX + SI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. Which is NOT a valid 8088 register for indirect addressing?</div>
+                    <div class="mcq-answer">(D) DX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. A byte-sized register is:</div>
+                    <div class="mcq-answer">(A) AL</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. Is mov [bx], [si] valid?</div>
+                    <div class="mcq-answer">(B) No (Memory-to-memory not allowed)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. Which segment is used for code?</div>
+                    <div class="mcq-answer">(A) CS</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. Which segment is used for data?</div>
+                    <div class="mcq-answer">(B) DS</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. Base registers include:</div>
+                    <div class="mcq-answer">(C) BX and BP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. Index registers include:</div>
+                    <div class="mcq-answer">(B) SI and DI</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. Default segment for BP is:</div>
+                    <div class="mcq-answer">(C) SS</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. The assembler is a:</div>
+                    <div class="mcq-answer">(B) "Dumb" translator</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. mov ax, 0x4c00 is used for:</div>
+                    <div class="mcq-answer">(B) Program termination</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. int 0x21 is a:</div>
+                    <div class="mcq-answer">(C) DOS service call</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Effective address calculation happens in:</div>
+                    <div class="mcq-answer">(A) The processor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. Labels are used for:</div>
+                    <div class="mcq-answer">(C) Programmer convenience</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. num1: dw 5 reserves:</div>
+                    <div class="mcq-answer">(B) One word</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. Can we move a segment register directly to memory?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. Can we move an immediate value to a segment register?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. mov es, ax is:</div>
+                    <div class="mcq-answer">(A) Valid</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. The symbol : after a name indicates a:</div>
+                    <div class="mcq-answer">(B) Label</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. Byte variables are defined with:</div>
+                    <div class="mcq-answer">(A) db</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. mov ax, [1200] means:</div>
+                    <div class="mcq-answer">(B) Move data at address 1200 to AX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. Addressing modes provide:</div>
+                    <div class="mcq-answer">(C) Flexibility in data access</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. Indirect addressing is useful for:</div>
+                    <div class="mcq-answer">(A) Arrays and loops</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Which register cannot be used in []?</div>
+                    <div class="mcq-answer">(D) CX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. Memory cells are normally:</div>
+                    <div class="mcq-answer">(B) 8-bit</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. Cell width is also called:</div>
+                    <div class="mcq-answer">(C) Word size</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. [org 0x0100] is a:</div>
+                    <div class="mcq-answer">(B) Directive</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. Does assembly have "types" like HLL?</div>
+                    <div class="mcq-answer">(B) No (only sizes)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. Who handles "segment association"?</div>
+                    <div class="mcq-answer">(A) The processor hardware</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. Calculate Physical Address: `DS=2000h`, `BX=0050h`</div>
+                    <div class="mcq-answer">(B) 20050h</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. Which instruction is INVALID?</div>
+                    <div class="mcq-answer">(C) `MOV [BX], [SI]`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. In `MOV AX, [BP+10]`, which segment is used by default?</div>
+                    <div class="mcq-answer">(B) SS (Stack Segment)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. Why is `MOV DS, 1234h` illegal?</div>
+                    <div class="mcq-answer">(A) Cannot move Immediate to Segment Register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. `MOV BYTE PTR [BX], 5` is necessary because:</div>
+                    <div class="mcq-answer">(C) The assembler doesn't know the size of `5`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. Which combo is illegal for effective address calculation?</div>
+                    <div class="mcq-answer">(B) `[BX + CX]` (Two base registers)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. `MOV AX, [BX+SI+5]` uses which addressing mode?</div>
+                    <div class="mcq-answer">(D) Based Indexed with Displacement</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. If `DS=1000h`, what is the range of logical addresses?</div>
+                    <div class="mcq-answer">(A) 0000h to FFFFh</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. Can `IP` be used as an operand in `MOV`?</div>
+                    <div class="mcq-answer">(B) No, never</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. What is the offset of `word_var` in `MOV AX, word_var`?</div>
+                    <div class="mcq-answer">(C) The address determined by the assembler</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter1.html" class="btn">← Previous Chapter</a>
+            <a href="chapter3.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Software Interrupts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 7: Software Interrupts</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chapter6.html">Prev</a> <a href="chapter8.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Interrupt</h3>
+                <p>A mechanism to divert the processor from its current execution to a specialized routine (ISR) to
+                    handle a specific event.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Interrupt Vector Table (IVT)</h3>
+                <p>A table located at the very beginning of memory (0000:0000) containing the 4-byte addresses (CS and
+                    IP) of all 256 possible interrupts.</p>
+            </div>
+            <div class="definition-card">
+                <h3>ISR (Interrupt Service Routine)</h3>
+                <p>The code that executes when an interrupt occurs.</p>
+            </div>
+            <div class="definition-card">
+                <h3>IRET</h3>
+                <p>A special return instruction for interrupts that pops the Flags register, CS, and IP from the stack
+                    to resume the original program.</p>
+            </div>
+            <div class="definition-card">
+                <h3>INT Instruction</h3>
+                <p>A software-triggered interrupt that behaves like a far call but also saves the flags register on the
+                    stack.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. The Interrupt Vector Table (IVT) can hold how many interrupts?</div>
+                    <div class="mcq-answer">(C) 256</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. How many bytes are used for each entry in the IVT?</div>
+                    <div class="mcq-answer">(B) 4 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. The total size of the IVT in memory is:</div>
+                    <div class="mcq-answer">(C) 1024 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. The IVT is located at which physical address?</div>
+                    <div class="mcq-answer">(A) 0x00000</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. What does INT 0x21 generally represent?</div>
+                    <div class="mcq-answer">(B) DOS Services</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. Which instruction is used to return from an ISR?</div>
+                    <div class="mcq-answer">(C) IRET</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. When an interrupt occurs, what is the first thing pushed to the stack?
+                    </div>
+                    <div class="mcq-answer">(A) Flags Register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. The instruction INT 3 is commonly used for:</div>
+                    <div class="mcq-answer">(B) Breakpoints in Debuggers</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. The address of the ISR for INT 0 is at offset:</div>
+                    <div class="mcq-answer">(A) 0</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The address of the ISR for INT 1 is at offset:</div>
+                    <div class="mcq-answer">(B) 4</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. An interrupt is similar to which call?</div>
+                    <div class="mcq-answer">(C) Far Call</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. Which flag is cleared automatically when an interrupt occurs?</div>
+                    <div class="mcq-answer">(B) Interrupt Flag (IF)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Why is the Interrupt Flag cleared during an ISR?</div>
+                    <div class="mcq-answer">(A) To prevent nested interrupts initially</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. IRET pops how many bytes from the stack in total?</div>
+                    <div class="mcq-answer">(C) 6 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. Software interrupts are:</div>
+                    <div class="mcq-answer">(A) Synchronous</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. INT 0 is triggered by:</div>
+                    <div class="mcq-answer">(B) Divide by zero error</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. The IVT contains:</div>
+                    <div class="mcq-answer">(C) Segment and Offset</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. Which instruction is used to generate a software interrupt?</div>
+                    <div class="mcq-answer">(A) INT</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. What is the vector number for the 'Print Screen' interrupt?</div>
+                    <div class="mcq-answer">(B) 5</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. If an IVT entry is 00 00 00 00, it means:</div>
+                    <div class="mcq-answer">(A) No ISR is defined</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. The order of popping in IRET is:</div>
+                    <div class="mcq-answer">(B) IP, CS, Flags</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. Which register is typically used to specify the sub-service in INT
+                        0x21?</div>
+                    <div class="mcq-answer">(A) AH</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. Can a programmer change the IVT?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. Interrupt 0x10 is used for:</div>
+                    <div class="mcq-answer">(B) Video Services</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. Interrupt 0x16 is used for:</div>
+                    <div class="mcq-answer">(C) Keyboard Services</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. Interrupt 0x13 is used for:</div>
+                    <div class="mcq-answer">(A) Disk Services</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. "Faults" and "Traps" are types of:</div>
+                    <div class="mcq-answer">(B) Exceptions</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. Is an interrupt more efficient than polling?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. The priority of software interrupts is:</div>
+                    <div class="mcq-answer">(B) Fixed by the code</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. Which bit in the flags register controls the Trap Flag?</div>
+                    <div class="mcq-answer">(C) Bit 8</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. Software interrupts are initiated by:</div>
+                    <div class="mcq-answer">(A) The CPU</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. The BOUND instruction triggers which interrupt?</div>
+                    <div class="mcq-answer">(B) INT 5</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. The instruction INTO triggers an interrupt if:</div>
+                    <div class="mcq-answer">(C) Overflow flag is set</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Does IRET restore the Trap Flag?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The IVT is essentially an array of:</div>
+                    <div class="mcq-answer">(B) Far Pointers</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. To find the address of INT N, the CPU multiplies N by:</div>
+                    <div class="mcq-answer">(B) 4</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. Which segment register is used to access the IVT?</div>
+                    <div class="mcq-answer">(C) DS or ES (set to 0)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. The stack must be ______ before calling IRET.</div>
+                    <div class="mcq-answer">(A) Balanced</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. Can software interrupts be disabled using CLI?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. Wait-states are avoided using:</div>
+                    <div class="mcq-answer">(C) Interrupts</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. Who provides the ISRs for INT 0x10?</div>
+                    <div class="mcq-answer">(B) BIOS</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. INT 0x19 is used for:</div>
+                    <div class="mcq-answer">(C) Rebooting the system</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. A 'hook' involves saving the:</div>
+                    <div class="mcq-answer">(B) Old ISR address</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. The processor stops current execution when it sees:</div>
+                    <div class="mcq-answer">(A) INT instruction</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. Software interrupts are used for:</div>
+                    <div class="mcq-answer">(D) System Calls</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. What is the decimal vector for 0x21?</div>
+                    <div class="mcq-answer">(B) 33</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. How many software interrupts are reserved by Intel?</div>
+                    <div class="mcq-answer">(A) First 32</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. INT 1 is used for:</div>
+                    <div class="mcq-answer">(C) Single stepping</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. Does an ISR have to be in the same segment?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. The primary goal of an interrupt is:</div>
+                    <div class="mcq-answer">(A) Asynchronous notification</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. `IRET` restores values from the stack in what order (Top to Bottom)?
+                    </div>
+                    <div class="mcq-answer">(B) IP, CS, Flags</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. The main difference between `INT` and `CALL FAR` is:</div>
+                    <div class="mcq-answer">(A) `INT` pushes the Flags register automatically</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. If you modify IVT entry `0`, what happens?</div>
+                    <div class="mcq-answer">(C) You change the handler for "Divide by Zero" exceptions</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. Can you direct `INT 21h` to your own function?</div>
+                    <div class="mcq-answer">(A) Yes, by changing vector 0x21 in the IVT</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Why is `CS:IP` stored in the IVT reversed (IP first)?</div>
+                    <div class="mcq-answer">(B) Little Endian architecture</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. Address of the ISR for `INT 9` starts at:</div>
+                    <div class="mcq-answer">(A) `0000:0024` (Physical address 0x24)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. Hooking an interrupt involves:</div>
+                    <div class="mcq-answer">(C) Reading the old vector, saving it, and writing the new one</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. The Trap Flag (TF) allows for:</div>
+                    <div class="mcq-answer">(B) Single-stepping (INT 1 generation after every instruction)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. If `IF=0`, does `INT n` instruction still work?</div>
+                    <div class="mcq-answer">(A) Yes, Software Interrupts are not masked</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. `INT 3` is special because:</div>
+                    <div class="mcq-answer">(B) Its opcode is 1 byte (CC) instead of 2 bytes (CD imm8)</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter6.html" class="btn">← Previous Chapter</a>
+            <a href="chapter8.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>

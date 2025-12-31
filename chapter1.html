@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Assembly Language</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1>CS401 Study Guide</h1>
+        <p>Chapter 1: Introduction to Assembly Language</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html">Prev</a> <a href="chapter2.html">Next</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="definitions">
+            <h2>Key Definitions</h2>
+            <div class="definition-card">
+                <h3>Assembler</h3>
+                <p>A translator that converts instruction mnemonics back into their original numeric opcodes.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Opcode</h3>
+                <p>The unique numeric value that tells the processor which operation to perform.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Mnemonic</h3>
+                <p>Abbreviations of symbols (e.g., mov, add) used to make numeric opcodes easier for humans to remember.
+                </p>
+            </div>
+            <div class="definition-card">
+                <h3>Registers</h3>
+                <p>Small, temporary storage locations inside the processor used as a "scratch pad" to hold operands and
+                    results during execution.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Address Bus</h3>
+                <p>A unidirectional bus used by the processor to specify the memory location it wants to read from or
+                    write to.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Data Bus</h3>
+                <p>A bidirectional bus used to transfer actual data between the processor and memory or peripherals.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Control Bus</h3>
+                <p>A group of lines used to synchronize operations, such as signaling whether a "read" or "write" is
+                    occurring.</p>
+            </div>
+            <div class="definition-card">
+                <h3>Instruction Pointer (IP)</h3>
+                <p>A special register that always contains the memory address of the next instruction to be executed.
+                </p>
+            </div>
+            <div class="definition-card">
+                <h3>Flags Register</h3>
+                <p>A register where individual bits (flags) represent the status of the last mathematical or logical
+                    operation.</p>
+            </div>
+        </section>
+
+        <section class="mcqs">
+            <h2>Solved MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">1. Which bus is strictly unidirectional?</div>
+                    <div class="mcq-answer">(C) Address Bus</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">2. Which bus is used for synchronization?</div>
+                    <div class="mcq-answer">(B) Control Bus</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">3. The data bus is bidirectional because:</div>
+                    <div class="mcq-answer">(A) Data moves to and from the processor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">4. What is the "brain" of the computer?</div>
+                    <div class="mcq-answer">(D) Processor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">5. Memory is considered a:</div>
+                    <div class="mcq-answer">(B) Dumb device</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">6. A group of 8 bits is a:</div>
+                    <div class="mcq-answer">(C) Byte</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">7. What is the size of a "word" in 8088?</div>
+                    <div class="mcq-answer">(B) 16 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">8. 4 bits are known as a:</div>
+                    <div class="mcq-answer">(A) Nibble</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">9. Registers are faster than memory because:</div>
+                    <div class="mcq-answer">(C) They are inside the processor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">10. The instruction mov ax, 5 stores 5 in:</div>
+                    <div class="mcq-answer">(A) AX register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">11. Which register accumulates the result of operations?</div>
+                    <div class="mcq-answer">(B) Accumulator (AX)</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">12. The maximum memory an 8088 can address is:</div>
+                    <div class="mcq-answer">(B) 1 MB</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">13. Which register holds the address of the next instruction?</div>
+                    <div class="mcq-answer">(C) IP</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">14. Assembly is considered a:</div>
+                    <div class="mcq-answer">(A) Low-level language</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">15. A "nibble" consists of:</div>
+                    <div class="mcq-answer">(A) 4 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">16. Intel's 8088 is a:</div>
+                    <div class="mcq-answer">(B) 16-bit processor</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">17. Which flag is set if the result of an operation is zero?</div>
+                    <div class="mcq-answer">(B) Zero Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">18. The Carry flag is used for:</div>
+                    <div class="mcq-answer">(A) Unsigned arithmetic</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">19. If the MSB of a result is 1, which flag is set?</div>
+                    <div class="mcq-answer">(C) Sign Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">20. The [org 0x0100] directive defines:</div>
+                    <div class="mcq-answer">(B) Starting offset</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">21. The assembler converts mnemonics to:</div>
+                    <div class="mcq-answer">(A) Opcodes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">22. Registers are a:</div>
+                    <div class="mcq-answer">(B) Scarce and precious resource</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">23. Which bus carries the "read/write" intent?</div>
+                    <div class="mcq-answer">(C) Control Bus</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">24. A 64-bit processor's accumulator is:</div>
+                    <div class="mcq-answer">(D) 64 bits</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">25. The most significant bit (MSB) of a negative number is:</div>
+                    <div class="mcq-answer">(B) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">26. Which flag is used for single-stepping?</div>
+                    <div class="mcq-answer">(D) Trap Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">27. External interrupts are controlled by:</div>
+                    <div class="mcq-answer">(B) Interrupt Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">28. String operations use which flag for direction?</div>
+                    <div class="mcq-answer">(A) Direction Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">29. The register BX is often used as a:</div>
+                    <div class="mcq-answer">(C) Base register</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">30. How many registers does the 8088 have?</div>
+                    <div class="mcq-answer">(C) 14</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">31. In mov ax, bx, which is the destination?</div>
+                    <div class="mcq-answer">(A) AX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">32. Which register is used for count-based loops?</div>
+                    <div class="mcq-answer">(C) CX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">33. The debugger can "reverse" opcodes into:</div>
+                    <div class="mcq-answer">(B) Mnemonics</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">34. Memory access is generally:</div>
+                    <div class="mcq-answer">(B) Slower than register access</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">35. The "word size" of a memory is its:</div>
+                    <div class="mcq-answer">(A) Cell width</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">36. Which architecture will we use as an example?</div>
+                    <div class="mcq-answer">(B) IBM PC / Intel</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">37. What coverage is "distance" from the machine?</div>
+                    <div class="mcq-answer">(C) Compilers/Interpreters</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">38. The primary purpose of the control bus is:</div>
+                    <div class="mcq-answer">(D) Synchronization</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">39. Is the data bus unidirectional?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">40. Does the 8088 have a 32-bit accumulator?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">41. A programmer can disable interrupts using:</div>
+                    <div class="mcq-answer">(A) Interrupt Flag</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">42. What does "MSB" stand for?</div>
+                    <div class="mcq-answer">(A) Most Significant Bit</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">43. Which register is specifically the "scratch pad"?</div>
+                    <div class="mcq-answer">(D) All general purpose registers</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">44. The result of add ax, bx is stored in:</div>
+                    <div class="mcq-answer">(A) AX</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">45. What is 0x0100 in decimal?</div>
+                    <div class="mcq-answer">(B) 256</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">46. What does the "S" flag represent?</div>
+                    <div class="mcq-answer">(C) Sign</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">47. Can memory initiate a "speak" operation?</div>
+                    <div class="mcq-answer">(B) No</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">48. Binary 1 always equals:</div>
+                    <div class="mcq-answer">(A) 1</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">49. Assembly is simple because:</div>
+                    <div class="mcq-answer">(C) It reflects the computer's simplicity</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">50. Who sets the Interrupt Flag?</div>
+                    <div class="mcq-answer">(B) The programmer</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mcqs tricky">
+            <h2>🔥 Challenging / Tricky MCQs</h2>
+            <div class="mcq-grid">
+                <div class="mcq-card">
+                    <div class="mcq-question">51. What happens if you try to execute `MOV CS, AX`?</div>
+                    <div class="mcq-answer">(C) Illegal Instruction Error</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">52. If `AX=1234h` and you execute `MOV AL, AH`, what is `AX`?</div>
+                    <div class="mcq-answer">(A) 1212h</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">53. Which of these is NOT a valid instruction?</div>
+                    <div class="mcq-answer">(B) `MOV IP, 100h`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">54. A 20-bit address bus can access exactly how many bytes?</div>
+                    <div class="mcq-answer">(C) 1,048,576 bytes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">55. Does `MOV AX, BX` affect the Zero Flag?</div>
+                    <div class="mcq-answer">(B) No, MOV never affects flags</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">56. Can `DS` and `ES` point to the same segment?</div>
+                    <div class="mcq-answer">(A) Yes</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">57. Which register pair is invalid for a 16-bit operation?</div>
+                    <div class="mcq-answer">(D) `AH, BX`</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">58. If `CS=1000h` and `IP=0200h`, what is the Physical Address?</div>
+                    <div class="mcq-answer">(B) 10200h</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">59. Which bus operation happens first during an instruction fetch?</div>
+                    <div class="mcq-answer">(A) Address is placed on Address Bus</div>
+                </div>
+                <div class="mcq-card">
+                    <div class="mcq-question">60. Why is `MOV [1000], [2000]` illegal?</div>
+                    <div class="mcq-answer">(C) Memory-to-Memory transfer not allowed</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <div></div>
+            <a href="chapter2.html" class="btn">Next Chapter →</a>
+        </div>
+    </div>
+    <footer>
+        <p>Generated for CS401 Final Exam Preparation</p>
+        <button onclick="toggleTheme()" class="btn" style="margin-top:1rem; font-size:0.8rem;">Toggle Dark Mode</button>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        // Init theme
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.setAttribute('data-theme', saved);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+
+</html>
