@@ -1,0 +1,205 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #2c3e50;
+    --accent-color: #8e44ad;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --text-muted: #7f8c8d;
+    --border-radius: 12px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+[data-theme="dark"] {
+    --primary-color: #5dade2;
+    --secondary-color: #34495e;
+    --accent-color: #af7ac5;
+    --bg-color: #1a1a2e;
+    --card-bg: #16213e;
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.definitions {
+    margin-bottom: 3rem;
+}
+
+.definition-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    border-left: 5px solid var(--accent-color);
+    transition: transform 0.2s ease;
+}
+
+.definition-card:hover {
+    transform: translateY(-3px);
+}
+
+.definition-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.mcq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.mcq-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mcq-question {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+.mcq-answer {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: right;
+    align-self: flex-end;
+}
+
+[data-theme="dark"] .mcq-answer {
+    background: rgba(39, 174, 96, 0.2);
+    color: #2ecc71;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.chapter-link-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.chapter-link-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.chapter-link-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .mcq-grid {
+        grid-template-columns: 1fr;
+    }
+}
